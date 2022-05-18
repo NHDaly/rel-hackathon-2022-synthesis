@@ -1,4 +1,26 @@
 
+// How to use:
+// query(ctx, db, eng, "",
+//       inputs = Dict(:inserted_string => "def foo = 2"))
+
+// Forward Declaration:
+def inserted_string { false }
+
+def insert:rel:catalog:model["generated/synthesized"] =
+      concat3[
+          rel:catalog:model["generated/synthesized"],
+          "\n\n\n"
+          inserted_string
+      ]
+def delete:rel:catalog:model["generated/synthesized"] =
+      rel:catalog:model["generated/synthesized"]
 
 
+def foo = 2
 
+
+@inline
+def put_into_foo[str] {
+  // make it true that
+  foo = str
+}
