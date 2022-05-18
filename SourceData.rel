@@ -1,0 +1,34 @@
+module Movies
+
+    def edge:acted_in = "Tom Hanks", "MovieA"
+    def edge:acted_in = "Will Smith", "MovieA"
+    def edge:acted_in = "Will Smith", "Aladdin"
+    
+    def edge:director = "Aladdin", "Nathan"
+    
+end
+
+def Movies:node(v) = Movies:edge(_,v,_) or Movies:edge(_,_,v)
+
+
+
+
+
+
+
+// module visualize_kg[G]
+//    with G use node, edge
+//    def edge_attribute["label",a,b] = string[l]
+//            from l where edge(l,a,b)
+// end
+
+
+
+def Undirected = Movies
+def Undirected:edge(e,a,b) = Movies:edge(e,b,a)
+
+
+// def output = top[5, length, all_paths[Undirected]]
+
+
+

@@ -1,0 +1,43 @@
+// function synthesize(input_data_graph, given_edge, name): RelDefinition[]=
+
+// Simplest base case: there's an edge already between them
+@inline
+def synthesize[GRAPH, a, b, name] = 
+    concat4["def ", name, " = ", string[e]]
+    from e
+    where GRAPH:edge(e, a, b)
+
+// Next easiest: two-hop
+@inline
+def synthesize[GRAPH, a, b, name] = 
+    concat4["def ", name, " = ", 
+        concat3[string[e1], " . ", string[e2]]]
+    from e1, e2, z
+    where GRAPH:edge(e1, a, z)
+    and   GRAPH:edge(e2, z, b)
+
+// TODO: Get the variable names from their types?? or the relation names?
+@inline
+def synthesize[GRAPH, a, b, name] = 
+    concat4["def ", name, "(a,c) = exists b : ", 
+        concat4[string[e1], "(a,b) and ", string[e2], "(b,c)"]]
+    from e1, e2, z
+    where GRAPH:edge(e1, a, z)
+    and   GRAPH:edge(e2, z, b)
+
+
+// def a_d(a,b) = 
+//     acted_in(a,b) and 
+//     director(b,c)
+
+
+// one-hop each to shared target -- "make it a triangle"
+@inline
+def synthesize[GRAPH, a, b, name] = 
+    concat4["def ", name, "(a,b) = ", 
+        concat4[string[e1], "(a,t) and ", string[e2], "(b,t) from t"]]
+    from e1, e2, t
+    where GRAPH:edge(e1, a, t)
+    and   GRAPH:edge(e2, b, t)
+
+

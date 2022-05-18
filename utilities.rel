@@ -1,0 +1,8 @@
+
+
+def concat2 = concat
+@inline def concat3[a,b,c] = concat[concat[a,b], string[c]]
+@inline def concat4[a,b,c,d] = concat[concat3[a,b,c], string[d]]
+@inline def concat5[a,b,c,d,e] = concat[concat4[a,b,c,d], string[e]]
+
+
