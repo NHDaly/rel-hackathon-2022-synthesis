@@ -1,11 +1,12 @@
 
 /*
 // How to use:
-query(ctx, db, eng, "",
+exec(ctx, db, eng, "",
       inputs = Dict(
           :inserted_string => "def costars(a,b) = acted_in(a,t) and acted_in(b,t) from t",
           :graph_name => "Movies",
-       ))
+       ),
+       readonly = false)
 */
 
 
@@ -14,18 +15,20 @@ def inserted_string { false }
 def graph_name { false }
 
 def insert:rel:catalog:model["generated/synthesized"] =
-      concat4[
-          rel:catalog:model["generated/synthesized"],
-          """\n\n
-          module
-          """,
-          graph_name,
-          concat3["\n",
-                  inserted_string,
-                  """
-                  end
-                  """]
-      ]
+      // concat4[
+      //     rel:catalog:model["generated/synthesized"],
+      //     """\n\n
+      //     module
+      //     """,
+      //     graph_name,
+      //     concat3["\n",
+      //             inserted_string,
+      //             """
+      //             end
+      //             """]
+      // ]
+      inserted_string
+      
 def delete:rel:catalog:model["generated/synthesized"] =
       rel:catalog:model["generated/synthesized"]
 

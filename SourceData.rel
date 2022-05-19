@@ -5,22 +5,17 @@ module Movies
     def edge:acted_in = "Will Smith", "Aladdin"
     
     def edge:director = "Aladdin", "Nathan"
-    
+
+    def node:Director = ("Nathan")
+    def node:Movie = ("Aladdin")
+    def node:Actor = ("Tom Hanks")
+    def node:Actor = ("Will Smith")
 end
 
-def Movies:node(v) = Movies:edge(_,v,_) or Movies:edge(_,_,v)
+// def Movies:node(v) = Movies:edge(_,v,_) or Movies:edge(_,_,v)
 
 
 
-
-
-
-
-// module visualize_kg[G]
-//    with G use node, edge
-//    def edge_attribute["label",a,b] = string[l]
-//            from l where edge(l,a,b)
-// end
 
 
 

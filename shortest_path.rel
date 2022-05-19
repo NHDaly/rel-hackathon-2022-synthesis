@@ -1,4 +1,10 @@
 
+// @inline
+// def synthesize:expensive[GRAPH, a, b, name] = 
+//     ...
+
+
+
 // Shortest Path?
 
 def my_graph = Undirected

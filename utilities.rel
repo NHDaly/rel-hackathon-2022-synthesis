@@ -1,8 +1,46 @@
 
 
-def concat2 = concat
+@inline def concat2 = concat
 @inline def concat3[a,b,c] = concat[concat[a,b], string[c]]
 @inline def concat4[a,b,c,d] = concat[concat3[a,b,c], string[d]]
 @inline def concat5[a,b,c,d,e] = concat[concat4[a,b,c,d], string[e]]
+
+
+
+
+doc"""
+    graphviz[display_knowledge_graph[G]]
+
+Displays a knowledge graph G with graphviz, with the nodes and edges
+labelled with their semantic names from the knowledge graph, G.
+
+A knowledge graph is a graph, where the edges (and optionally the nodes)
+have semantic labels, or categorical labels. In rel, this means
+the edges are separate, named relations.
+
+Example:
+```
+module MyMovies
+    def edge[:"acted in"](a, b) = actors(a, b)
+    def node:actor(a) = actors(a, _)
+    def node:movie(m) = actors(_, m)
+end
+def output = graphviz[display_knowledge_graph[MyMovies]]
+```
+"""
+@inline
+module display_knowledge_graph[G]
+   def node = G:node
+   def edge = G:edge
+   def edge_attribute[a,b,"label"] = string[l]
+           from l where G:edge(l, a, b)
+
+   def edge_attribute[a,b,"fontsize"] = "10pt"
+           , G:edge(_, a, b)
+
+   def node_attribute[n, "label"] = 
+           concat[concat[typ, ": "], string[n]]
+           from typ where G:node(typ, n)
+end
 
 
